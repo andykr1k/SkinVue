@@ -27,17 +27,17 @@ export default function Dashboard() {
         <div className="grid lg:hidden mt-5 space-y-3">
           <div className="bg-dimgrey w-full h-[768px] rounded-md"></div>
           <div className="flex space-x-3">
-            <div className="bg-dimgrey w-48 h-[248px] rounded-md"></div>
-            <div className="bg-dimgrey w-48 h-[248px] rounded-md"></div>
+            <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
+            <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
           </div>
           <div className="space-y-3">
-            <div className="bg-dimgrey w-[396px] h-[508px] rounded-md"></div>
+            <div className="bg-dimgrey w-full h-[508px] rounded-md"></div>
             <div className="flex space-x-3">
-              <div className="bg-dimgrey w-48 h-[248px] rounded-md"></div>
-              <div className="bg-dimgrey w-48 h-[248px] rounded-md"></div>
+              <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
+              <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
             </div>
             <div className="flex space-x-3">
-              <div className="bg-dimgrey w-48 h-[248px] rounded-md"></div>
+              <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
             </div>
           </div>
         </div>
