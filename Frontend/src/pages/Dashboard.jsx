@@ -37,7 +37,7 @@ export default function Dashboard() {
               <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
             </div>
             <div className="flex space-x-3">
-              <div className="bg-dimgrey w-1/2 h-[248px] rounded-md"></div>
+              <div className="bg-dimgrey w-full h-[248px] rounded-md"></div>
             </div>
           </div>
         </div>
