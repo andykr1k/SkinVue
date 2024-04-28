@@ -25,6 +25,23 @@ export async function getImageUrl() {
   }
 }
 
+export async function updateData(name, value) {
+  try {
+  const { data, error } = await supabase
+    .from('data')
+    .update({ prediction: value })
+    .eq('picture_name', name)
+    .select()     
+    if (error) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return null;
+  }
+}
+
 export async function fetchData() {
   try {
     const { data, error } = await supabase

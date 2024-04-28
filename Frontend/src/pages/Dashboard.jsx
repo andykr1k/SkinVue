@@ -1,7 +1,6 @@
-import { Chart, FlipFacts, ScrollingSentences } from "../components";
+import { FlipFacts, ScrollingSentences } from "../components";
 import { useState, useEffect } from "react";
-import { supabase, getImageUrl, fetchData } from "../functions/supabase";
-import { Drawer } from "vaul";
+import { supabase, getImageUrl, fetchData, updateData } from "../functions/supabase";
 
 export default function Dashboard() {
   const [position, setPosition] = useState("Front");
@@ -11,6 +10,21 @@ export default function Dashboard() {
 
   const extremities = ["Arms", "Legs", "Chest", "Back"];
 
+  const predict = async () => {
+    try {
+      let url = "http://127.0.0.1:5000/predict/" + imageUrl.split("/")[8];
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const res = await response.text();
+      console.log(res)
+      updateData(imageUrl.split("/")[8], res);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
   useEffect(() => {
     fetchData()
       .then((data) => {
@@ -20,7 +34,7 @@ export default function Dashboard() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     async function fetchImageUrl() {
@@ -376,7 +390,10 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
-              <button className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold">
+              <button
+                onClick={predict}
+                className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold text-xl"
+              >
                 Predict
               </button>
             </div>
@@ -404,7 +421,7 @@ export default function Dashboard() {
                 {data.map((log) => (
                   <div
                     key={log.picture_name}
-                    className="flex justify-between mb-2 dark:text-ghostwhite text-richblack "
+                    className="flex justify-between mb-2 dark:text-ghostwhite text-richblack"
                   >
                     <h5>{log.created_at.substring(0, 10)}</h5>
                     <h5>{log.picture_name}</h5>
@@ -753,7 +770,10 @@ export default function Dashboard() {
                 </button>
               ))}
             </div>
-            <button className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold">
+            <button
+              onClick={predict}
+              className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold"
+            >
               Predict
             </button>
           </div>
