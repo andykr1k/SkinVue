@@ -1,5 +1,5 @@
 from flask import Flask
-from cv2 import imread, IMREAD_GRAYSCALE, resize
+from PIL import Image
 import numpy as np
 from tensorflow.keras import layers, Sequential
 
@@ -25,11 +25,11 @@ def predict(path):
 
 
 def preprocessImage(image):
-    image = imread(image, IMREAD_GRAYSCALE)
-    if image is not None:
-        image = resize(image, (28, 28))
-        image = image.astype(np.float32) / 255.0
-    return image
+    with Image.open(image) as img:
+        img_gray = img.convert('L')
+        img_resized = img_gray.resize((28, 28))
+        image_array = np.array(img_resized, dtype=np.float32) / 255.0
+    return image_array
 
 def CNN(image):
     model = Sequential([
@@ -47,6 +47,7 @@ def CNN(image):
         layers.Dropout(0.6),
         layers.Dense(7, activation='softmax')
     ])
+
     model.load_weights('../weights/train_1.h5')
     
     model.compile(
@@ -54,6 +55,7 @@ def CNN(image):
         loss='categorical_crossentropy',
         metrics=['accuracy']
     )
+
     image = image.reshape(1, 28, 28, 1)
     predictions = model.predict(image)
     arr = np.round(predictions)
