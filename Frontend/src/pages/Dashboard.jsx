@@ -1,11 +1,15 @@
 import { Chart, FlipFacts, ScrollingSentences } from "../components";
 import { useState, useEffect } from "react";
 import { supabase, getImageUrl, fetchData } from "../functions/supabase";
+import { Drawer } from "vaul";
 
 export default function Dashboard() {
   const [position, setPosition] = useState("Front");
   const [imageUrl, setImageUrl] = useState(null);
   const [data, setData] = useState([]);
+  const [selectedExtremity, setSelectedExtremity] = useState(null);
+
+  const extremities = ["Arms", "Legs", "Chest", "Back"];
 
   useEffect(() => {
     fetchData()
@@ -345,6 +349,9 @@ export default function Dashboard() {
         <div className="flex space-x-3 w-1/2">
           <div className="space-y-3 w-1/3">
             <div className="relative bg-black/10 w-full h-[248px] rounded-md p-3">
+              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
+                Recently Uploaded
+              </h3>
               {imageUrl && (
                 <img
                   className="w-full h-5/6 rounded-md"
@@ -352,11 +359,27 @@ export default function Dashboard() {
                   alt="Supabase Image"
                 />
               )}
-              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
-                Recently Uploaded
-              </h3>
             </div>
-            <div className="relative bg-black/10 w-full h-[248px] rounded-md"></div>
+            <div className="relative grid bg-black/10 w-full h-[248px] rounded-md p-2">
+              <div className="grid grid-cols-2 mb-2">
+                {extremities.map((extremity) => (
+                  <button
+                    key={extremity}
+                    onClick={() => setSelectedExtremity(extremity)}
+                    className={`rounded-md font-bold m-1 ${
+                      selectedExtremity === extremity
+                        ? "bg-blue-500 text-white"
+                        : "bg-black/20 dark:text-ghostwhite text-richblack"
+                    }`}
+                  >
+                    {extremity}
+                  </button>
+                ))}
+              </div>
+              <button className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold">
+                Predict
+              </button>
+            </div>
             <div className="relative bg-black/10 w-full h-[248px] rounded-md">
               <ScrollingSentences />
             </div>
@@ -367,7 +390,7 @@ export default function Dashboard() {
                 <h4 className="dark:text-ghostwhite text-richblack font-bold text-3xl mb-2">
                   History
                 </h4>
-                <div className="grid grid-cols-3">
+                <div className="flex justify-between">
                   <h4 className="dark:text-ghostwhite text-richblack font-bold">
                     Date
                   </h4>
@@ -381,11 +404,15 @@ export default function Dashboard() {
                 {data.map((log) => (
                   <div
                     key={log.picture_name}
-                    className="grid grid-cols-3 mb-2 dark:text-ghostwhite text-richblack "
+                    className="flex justify-between mb-2 dark:text-ghostwhite text-richblack "
                   >
                     <h5>{log.created_at.substring(0, 10)}</h5>
                     <h5>{log.picture_name}</h5>
-                    <h5>{log.prediction}</h5>
+                    {log.prediction === null ? (
+                      <h5>Predict</h5>
+                    ) : (
+                      <h5>{log.prediction}</h5>
+                    )}
                   </div>
                 ))}
               </div>
@@ -710,7 +737,26 @@ export default function Dashboard() {
               Recently Uploaded
             </h3>
           </div>
-          <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md"></div>
+          <div className="relative grid bg-black/10 w-1/2 h-[248px] rounded-md p-2">
+            <div className="grid grid-cols-2 mb-2">
+              {extremities.map((extremity) => (
+                <button
+                  key={extremity}
+                  onClick={() => setSelectedExtremity(extremity)}
+                  className={`rounded-md font-bold m-1 ${
+                    selectedExtremity === extremity
+                      ? "bg-blue-500 text-white"
+                      : "bg-black/20 dark:text-ghostwhite text-richblack"
+                  }`}
+                >
+                  {extremity}
+                </button>
+              ))}
+            </div>
+            <button className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold">
+              Predict
+            </button>
+          </div>
         </div>
         <div className="space-y-3">
           <div className="bg-black/10 w-full h-[508px] rounded-md">
@@ -718,7 +764,7 @@ export default function Dashboard() {
               <h4 className="dark:text-ghostwhite text-richblack font-bold text-3xl mb-2">
                 History
               </h4>
-              <div className="grid grid-cols-3">
+              <div className="flex justify-between ">
                 <h4 className="dark:text-ghostwhite text-richblack font-bold">
                   Date
                 </h4>
@@ -732,11 +778,15 @@ export default function Dashboard() {
               {data.map((log) => (
                 <div
                   key={log.picture_name}
-                  className="grid grid-cols-3 mb-2 dark:text-ghostwhite text-richblack "
+                  className="flex justify-between mb-2 dark:text-ghostwhite text-richblack "
                 >
                   <h5>{log.created_at.substring(0, 10)}</h5>
                   <h5>{log.picture_name}</h5>
-                  <h5>{log.prediction}</h5>
+                  {log.prediction === null ? (
+                    <h5>Predict</h5>
+                  ) : (
+                    <h5>{log.prediction}</h5>
+                  )}
                 </div>
               ))}
             </div>
