@@ -743,7 +743,7 @@ export default function Dashboard() {
           </div>
           <div className="flex space-x-3">
             <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
-              <ScrollingSentences />
+              <FlipFacts />
             </div>
             <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md p-3">
               <a
@@ -759,11 +759,6 @@ export default function Dashboard() {
               <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
                 Find A Doc
               </h3>
-            </div>
-          </div>
-          <div className="flex space-x-3">
-            <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
-              <FlipFacts />
             </div>
           </div>
         </div>
