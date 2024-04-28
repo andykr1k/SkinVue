@@ -1,13 +1,7 @@
 from flask import Flask
 from cv2 import imread, IMREAD_GRAYSCALE, resize
 import numpy as np
-from keras import layers, Sequential
-from supabase import create_client, Client
-
-url: str = "https://whqnperemsymnmpfsoyi.supabase.co"
-key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndocW5wZXJlbXN5bW5tcGZzb3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQyNjIzNTksImV4cCI6MjAyOTgzODM1OX0.hU8VUWDVuX6DEP9QhoC8hOjmXlOJUuLcho7Guqxp_G4"
-
-supabase: Client = create_client(url, key)
+from tensorflow.keras import layers, Sequential
 
 app = Flask(__name__)
 
@@ -15,10 +9,11 @@ app = Flask(__name__)
 def hello():
     return 'Hello, World!'
 
-@app.route('/predict')
-def predict():
-    # Download latest pic from supabase
-    response = supabase.table('data').select("*").execute()
+@app.route('/predict/<path>')
+def predict(path):
+    url = "https://whqnperemsymnmpfsoyi.supabase.co/storage/v1/object/public/pictures/"
+
+    image_path = url + path
 
     # image = preprocessImage(file)
 
@@ -26,7 +21,7 @@ def predict():
 
     # Update DB with Prediction
 
-    return response
+    return image_path
 
 
 def preprocessImage(image):
