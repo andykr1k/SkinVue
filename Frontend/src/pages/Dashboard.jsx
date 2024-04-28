@@ -367,7 +367,10 @@ export default function Dashboard() {
                   </h4>
                 </div>
                 {data.map((log) => (
-                  <div key={log.picture_name} className="mb-2">
+                  <div
+                    key={log.picture_name}
+                    className="mb-2 dark:text-ghostwhite text-richblack "
+                  >
                     {log.picture_name}
                   </div>
                 ))}
@@ -716,7 +719,10 @@ export default function Dashboard() {
                 </h4>
               </div>
               {data.map((log) => (
-                <div key={log.picture_name} className="mb-2">
+                <div
+                  key={log.picture_name}
+                  className="mb-2 dark:text-ghostwhite text-richblack"
+                >
                   {log.picture_name}
                 </div>
               ))}
