@@ -34,7 +34,7 @@ export default function Dashboard() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, [data]);
+  }, []);
 
   useEffect(() => {
     async function fetchImageUrl() {
