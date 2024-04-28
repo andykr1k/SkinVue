@@ -1,4 +1,15 @@
+import { useState } from "react";
+
 export default function LogInPage() {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState("");
+
+    function handleLogin(){
+        if (username === "test" && password == "test"){
+
+        }
+    }
+    
   return (
     <div className="flex h-screen w-full items-center justify-center bg-ghostwhite px-4 dark:bg-richblack">
       <div className="w-full max-w-md space-y-6">
