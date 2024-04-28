@@ -1,9 +1,7 @@
 from flask import Flask
-import cv2
+from cv2 import imread, IMREAD_GRAYSCALE, resize
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras import layers
-from tensorflow import keras
+from keras import layers, Sequential
 from supabase import create_client, Client
 
 url: str = "https://whqnperemsymnmpfsoyi.supabase.co"
@@ -32,14 +30,14 @@ def predict():
 
 
 def preprocessImage(image):
-    image = cv2.imread(image, cv2.IMREAD_GRAYSCALE)
+    image = imread(image, IMREAD_GRAYSCALE)
     if image is not None:
-        image = cv2.resize(image, (28, 28))
+        image = resize(image, (28, 28))
         image = image.astype(np.float32) / 255.0
     return image
 
 def CNN(image):
-    model = keras.Sequential([
+    model = Sequential([
         layers.Conv2D(16, (3, 3), activation='relu', input_shape=(28, 28, 1)),
         layers.MaxPooling2D(),
         layers.BatchNormalization(),
