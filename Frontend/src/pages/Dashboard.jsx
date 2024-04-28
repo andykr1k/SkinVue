@@ -1,4 +1,4 @@
-import { Chart } from "../components";
+import { Chart, FlipFacts, ScrollingSentences } from "../components";
 import { useState, useEffect } from "react";
 import { supabase, getImageUrl, fetchData } from "../functions/supabase";
 
@@ -344,21 +344,33 @@ export default function Dashboard() {
         </div>
         <div className="flex space-x-3 w-1/2">
           <div className="space-y-3 w-1/3">
-            <div className="relative bg-black/10 w-full h-[248px] rounded-md">
+            <div className="relative bg-black/10 w-full h-[248px] rounded-md p-3">
               {imageUrl && (
                 <img
-                  className="w-full h-[248px] rounded-md"
+                  className="w-full h-5/6 rounded-md"
                   src={imageUrl}
                   alt="Supabase Image"
                 />
               )}
-              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
+              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
                 Recently Uploaded
               </h3>
             </div>
+            <div className="relative bg-black/10 w-full h-[248px] rounded-md"></div>
             <div className="relative bg-black/10 w-full h-[248px] rounded-md">
-              <div className="p-3">
-                <div className="flex justify-between">
+              <ScrollingSentences />
+            </div>
+          </div>
+          <div className="space-y-3 w-2/3">
+            <div className="bg-black/10 w-full h-[508px] rounded-md">
+              <div className="p-5">
+                <h4 className="dark:text-ghostwhite text-richblack font-bold text-3xl mb-2">
+                  History
+                </h4>
+                <div className="grid grid-cols-3">
+                  <h4 className="dark:text-ghostwhite text-richblack font-bold">
+                    Date
+                  </h4>
                   <h4 className="dark:text-ghostwhite text-richblack font-bold">
                     Image
                   </h4>
@@ -369,43 +381,33 @@ export default function Dashboard() {
                 {data.map((log) => (
                   <div
                     key={log.picture_name}
-                    className="mb-2 dark:text-ghostwhite text-richblack "
+                    className="grid grid-cols-3 mb-2 dark:text-ghostwhite text-richblack "
                   >
-                    {log.picture_name}
+                    <h5>{log.created_at.substring(0, 10)}</h5>
+                    <h5>{log.picture_name}</h5>
+                    <h5>{log.prediction}</h5>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="relative bg-black/10 w-full h-[248px] rounded-md">
-              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
-                Advice
-              </h3>
-            </div>
-          </div>
-          <div className="space-y-3 w-2/3">
-            <div className="bg-black/10 w-full h-[508px] rounded-md">
-              <Chart />
-            </div>
             <div className="flex space-x-3">
-              <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
-                <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
-                  Other Signs
-                </h3>
-              </div>
-              <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
+              <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md p-3">
                 <a
                   target="_blank"
                   href="https://www.google.com/maps/search/dermatologist/"
                 >
                   <img
-                    className="w-full h-[248px] rounded-md"
+                    className="w-full h-5/6 rounded-md"
                     src={"/map.webp"}
                     alt="Supabase Image"
                   />
                 </a>
-                <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
+                <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
                   Find A Doc
                 </h3>
+              </div>
+              <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
+                <FlipFacts />
               </div>
             </div>
           </div>
@@ -696,21 +698,30 @@ export default function Dashboard() {
           )}
         </div>
         <div className="flex space-x-3">
-          <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
+          <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md p-3">
             {imageUrl && (
               <img
-                className="w-full h-[248px] rounded-md"
+                className="w-full h-5/6 rounded-md"
                 src={imageUrl}
                 alt="Supabase Image"
               />
             )}
-            <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
+            <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
               Recently Uploaded
             </h3>
           </div>
-          <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
-            <div className="p-3">
-              <div className="flex justify-between">
+          <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md"></div>
+        </div>
+        <div className="space-y-3">
+          <div className="bg-black/10 w-full h-[508px] rounded-md">
+            <div className="p-5">
+              <h4 className="dark:text-ghostwhite text-richblack font-bold text-3xl mb-2">
+                History
+              </h4>
+              <div className="grid grid-cols-3">
+                <h4 className="dark:text-ghostwhite text-richblack font-bold">
+                  Date
+                </h4>
                 <h4 className="dark:text-ghostwhite text-richblack font-bold">
                   Image
                 </h4>
@@ -721,45 +732,38 @@ export default function Dashboard() {
               {data.map((log) => (
                 <div
                   key={log.picture_name}
-                  className="mb-2 dark:text-ghostwhite text-richblack"
+                  className="grid grid-cols-3 mb-2 dark:text-ghostwhite text-richblack "
                 >
-                  {log.picture_name}
+                  <h5>{log.created_at.substring(0, 10)}</h5>
+                  <h5>{log.picture_name}</h5>
+                  <h5>{log.prediction}</h5>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-        <div className="space-y-3">
-          <div className="bg-black/10 w-full h-[508px] rounded-md">
-            <Chart />
-          </div>
           <div className="flex space-x-3">
             <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
-              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
-                Advice
-              </h3>
+              <ScrollingSentences />
             </div>
-            <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
-              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
-                Other Signs
-              </h3>
-            </div>
-          </div>
-          <div className="flex space-x-3">
-            <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
+            <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md p-3">
               <a
                 target="_blank"
                 href="https://www.google.com/maps/search/dermatologist/"
               >
                 <img
-                  className="w-full h-[248px] rounded-md"
+                  className="w-full h-5/6 rounded-md"
                   src={"/map.webp"}
                   alt="Supabase Image"
                 />
               </a>
-              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 p-3 font-bold">
+              <h3 className="dark:text-ghostwhite text-richblack absolute bottom-0 py-3 font-bold">
                 Find A Doc
               </h3>
+            </div>
+          </div>
+          <div className="flex space-x-3">
+            <div className="relative bg-black/10 w-1/2 h-[248px] rounded-md">
+              <FlipFacts />
             </div>
           </div>
         </div>

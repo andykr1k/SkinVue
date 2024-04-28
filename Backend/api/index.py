@@ -1,7 +1,7 @@
 from flask import Flask
 from PIL import Image
 import numpy as np
-from tensorflow.keras import layers, Sequential
+from keras import layers, Sequential
 
 app = Flask(__name__)
 
