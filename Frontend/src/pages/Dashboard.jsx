@@ -391,7 +391,7 @@ export default function Dashboard() {
                 ))}
               </div>
               <button
-                onClick={predict}
+                onClick={() => predict()}
                 className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold text-xl"
               >
                 Predict
@@ -771,7 +771,7 @@ export default function Dashboard() {
               ))}
             </div>
             <button
-              onClick={predict}
+              onClick={() => predict()}
               className="bg-black/20 dark:text-ghostwhite text-richblack rounded-md font-bold"
             >
               Predict

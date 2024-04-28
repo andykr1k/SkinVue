@@ -59,26 +59,3 @@ export async function fetchData() {
     return null;
   }
 }
-
-// const SubmitFeedback = async (e) => {
-// e.preventDefault();
-// try {
-//     const { data, error } = await supabase.from("Feedback").insert([
-//     {
-//         first_name: firstName,
-//         last_name: lastName,
-//         type: selectedOption,
-//         description: feedbackMessage,
-//         email: email,
-//     },
-//     ]);
-
-//     if (error) {
-//     console.error(error);
-//     } else {
-//     toast.success("Thank you! We really appreciate your feedback!");
-//     }
-// } catch (error) {
-//     console.error(error);
-// }
-// };

@@ -24,7 +24,7 @@ def predict(path):
     result = get_disease_from_array(prediction, diseases)
     return str(result)
 
-diseases = ['AKIC','Basal Cell', 'Benign', 'Dermatofibroma', 'Melanoma', 'Mela Nevi', 'Lesions']
+diseases = ['AKIC','Basal Cell', 'Benign', 'Dermatofibroma', 'Melanoma', 'MelNev', 'Lesions']
 
 def get_disease_from_array(arr, diseases):
     for i, val in enumerate(arr[0]):
